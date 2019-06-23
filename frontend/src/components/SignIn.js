@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
+import url from '../Constants.js';
 import { TextField, Button, Grid, Typography, Card, Dialog, DialogActions, DialogTitle, CircularProgress } from '@material-ui/core';
 
 class SignIn extends Component {
@@ -34,7 +35,7 @@ class SignIn extends Component {
 
   onSignIn = () => {
     this.setState({route: 'loading'});
-    fetch('https://infinite-hamlet-28839.herokuapp.com/signin', {
+    fetch(url+'/signin', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

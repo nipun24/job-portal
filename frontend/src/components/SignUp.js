@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Redirect} from 'react-router-dom';
-import { TextField, Button, Grid, Typography, Card, Dialog, DialogActions, DialogTitle, CircularProgress } from '@material-ui/core';
+import url from '../Constants.js';
+import { TextField, Button, Grid, Typography, Card, Dialog, DialogActions,
+  DialogTitle, CircularProgress, DialogContent, DialogContentText } from '@material-ui/core';
 
 class SignUp extends Component {
   constructor(props) {
@@ -9,7 +11,6 @@ class SignUp extends Component {
       phone_no: '',
       Password: '',
       Name: '',
-      Aadhar: '',
       route: 'signup',
       alert: false
     }
@@ -38,22 +39,17 @@ class SignUp extends Component {
       this.setState({Name: event.target.value})
   }
 
-  onAadharChange = (event) => {
-      this.setState({Aadhar: event.target.value})
-  }
-
   onSignInClick = () => {
     this.setState({route: "signin"})
   }
 
   onSignUp = () => {
     this.setState({route: 'loading'});
-    fetch('https://infinite-hamlet-28839.herokuapp.com/signup', {
+    fetch(url+'/signup', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         name: this.state.Name,
-        aadhar: this.state.Aadhar,
         phoneNumber: this.state.phone_no,
         password: this.state.Password
       })
@@ -97,13 +93,6 @@ class SignUp extends Component {
               />
               <TextField
                 type="text"
-                label="Enter Aadhar Number"
-                placeholder="Enter Aadhar Number"
-                margin="normal"
-                onChange={this.onAadharChange}
-              />
-              <TextField
-                type="text"
                 label="Enter Phone Number"
                 placeholder="Enter Phone Number"
                 margin="normal"
@@ -132,6 +121,11 @@ class SignUp extends Component {
           aria-describedby="alert-dialog-description"
         >
         <DialogTitle>{"Error Signing Up!!"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Phone Number already exists
+          </DialogContentText>
+        </DialogContent>
         <DialogActions>
           <Button onClick={this.handleAlertClose} color="primary" autoFocus>
             Close

@@ -11,7 +11,6 @@ class App extends Component {
         user: {
             id: '',
             name: '',
-            phoneNumber: '',
             aadhar: '',
             password: ''
           }
@@ -23,7 +22,6 @@ class App extends Component {
         id: data.id,
         name: data.name,
         phoneNumber: data.phone_no,
-        aadhar: data.aadhar,
         password: data.password 
     }})
   }
